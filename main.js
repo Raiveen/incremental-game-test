@@ -1,54 +1,62 @@
 var player = {
-    gold: 499,
+    gold: 499000000,
     goldtimes: 1,
     goldperclickcost: 10,
     goldperclick: 1,
     automine: 0,
     autominecost: 20,
     prestiged: false,
-    prestigetimes: 0
+    prestigetimes: 0,
+    prestigecost: 1000
 };
-
-function mineGold() {
-    var x = 1
-    x += player.goldtimes - 1
-    if(player.prestiged) x = x*Math.pow(2, player.prestigetimes)
-    player.gold += x;
-    player.goldperclick = x
-    update();
-}
-
 function update() {
-    document.getElementById("goldperclick").innerHTML = player.goldperclick + " gold per click";
+    document.getElementById("goldperclick").innerHTML = player.goldperclick*(player.prestigetimes+1) + " gold per click";
     document.getElementById("goldMined").innerHTML = player.gold + " Gold Mined";
     document.getElementById("perClickUpgrade").innerHTML = "Increase gold mined by 1, Cost: " + player.goldperclickcost + " Gold";
+    document.getElementById("prestige").innerHTML = "Prestige for " + player.prestigecost + " Gold";
     document.getElementById("autoupg").innerHTML = "Currently mining " + player.automine*player.goldperclick + " gold /s Cost: " + player.autominecost + " Gold";
     if (player.gold >= 500) {
         document.getElementById("test").style.display = "inline";
     }
 }
+function mineGold() {
+    var x = player.goldperclick
+    
+    if(player.prestiged) x = x*Math.pow(2, player.prestigetimes)
+    player.gold += x;
+    
+    update();
+}
+
+
 
 function buyGoldPerClick() {
     if (player.gold >= player.goldperclickcost) {
         player.gold -= player.goldperclickcost;
         player.goldtimes++
-        player.goldperclickcost *= 2;
-        update();
+        player.goldperclick++;
+        player.goldperclickcost *= 2
     }
+    update(); 
 }
 
 function prestige() {
+    if (player.gold >= 1000) {
     player = {
         gold: 0,    
         goldtimes: 1,
         goldperclickcost: 10,
+        goldperclick: 1,
         update: 10,
         automine: 0,
         autominecost: 20,
         prestiged: true,
-        prestigetimes: player.prestigetimes
+        prestigetimes: player.prestigetimes,
+        prestigecost: player.prestigecost
     };
     player.prestigetimes++
+    player.prestigecost = (Math.floor(player.prestigecost *= Math.pow(1.5, player.prestigetimes)))}
+    update();
 }
 
 function auto() {
@@ -72,7 +80,8 @@ function clearData() {
         automine: 0,
         autominecost: 20,
         prestiged: false,
-        prestigetimes: 0
+        prestigetimes: 0,
+        prestigecost: 1000
     };
     location.reload()
     update();
@@ -112,6 +121,7 @@ function loadSaveGame() {
         player.autominecost = savegame.autominecost !== undefined ? savegame.autominecost : player.autominecost;
         player.prestiged = savegame.prestiged !== undefined ? savegame.prestiged : player.prestiged;
         player.prestigetimes = savegame.prestigetimes !== undefined ? savegame.prestigetimes : player.prestigetimes;
+        player.prestigecost = savegame.prestigecost !== undefined ? savegame.prestigecost : player.prestigecost;
     }
     update();
 }
