@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <title>Gold Miner</title>
+  </head>
+  <body>
+    <p id="goldMined">0 Gold Mined</p>
+    <p id="goldperclick">1 gold per click</p>
+    <button onclick="mineGold()">Mine Gold</button>
+    <button onclick="buyGoldPerClick()" id="perClickUpgrade">Increase gold mined by 1, Cost: 10 Gold</button>
+    <button onclick="auto()" id="autoupg">Unlock automine (1/s) Cost: 20 Gold</button>
+    <button onclick="clearData()">Clear Data</button>
+    <br><br>
+    <div id="test"><button onclick="prestige()" id="prestige">Prestige for 1000 Gold</button>
+        <p>Each prestige multiplies all gold by 2</p>
+        <p>First prestige unlocks the chance to mine diamonds</p></div>
+    
+    <script src="main.js" charset="utf-8" type="text/javascript"></script>
+  </body>
+</html>
