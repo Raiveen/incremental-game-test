@@ -73,7 +73,7 @@ function diamondmine() {
 function prestige() {
     if (player.gold >= player.prestigecost) {
         player = {
-            gold: 9999,
+            gold: 0,
             goldtimes: 1,
             goldperclickcost: 10,
             goldperclick: 1,
