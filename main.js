@@ -149,6 +149,7 @@ function prestige() {
         document.getElementById("firstprestige").style.display = "none";
         document.getElementById("diamondmined").style.display = "block";
         if (eme.ememile[1] == 1) player.automine = 10*(eme.emeralds-2);
+        if (player.automine < 0) player.automine *= -1;
         update();
     }
 }
@@ -182,6 +183,7 @@ function emerald() {
         
     }
     if (eme.ememile[1] == 1) player.automine = 10*(eme.emeralds-2);
+    if (player.automine < 0) player.automine *= -1;
     startAutoMine()
     update();
 }
