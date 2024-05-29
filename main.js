@@ -148,8 +148,7 @@ function prestige() {
         player.prestigecost = Math.floor(player.prestigecost * Math.pow(1.5, player.prestigetimes));
         document.getElementById("firstprestige").style.display = "none";
         document.getElementById("diamondmined").style.display = "block";
-        if (eme.ememile[1] == 1) player.automine = 10*(eme.emeralds-2);
-        if (player.automine < 0) player.automine *= -1;
+        if (eme.ememile[1] == 1) player.automine = 10*(eme.emeralds);
         update();
     }
 }
@@ -182,8 +181,7 @@ function emerald() {
         milestonecheck()
         
     }
-    if (eme.ememile[1] == 1) player.automine = 10*(eme.emeralds-2);
-    if (player.automine < 0) player.automine *= -1;
+    if (eme.ememile[1] == 1) player.automine = 10*(eme.emeralds);
     startAutoMine()
     update();
 }
